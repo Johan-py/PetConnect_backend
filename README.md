@@ -148,6 +148,3 @@ POST /api/alertas/crear/
 
 ✨ *“Backend sólido para una comunidad que conecta personas y mascotas”*
 
----
-
-👉 ¿Quieres que te arme un **README conjunto estilo fullstack** (frontend + backend en un solo repo con monorepo o documentación unificada) para que luzca como un proyecto completo?
