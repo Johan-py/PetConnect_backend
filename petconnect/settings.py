@@ -7,53 +7,20 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 load_dotenv(BASE_DIR / ".env")
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-fr43)@@7@i&3%*8_5s2x_=syag8m4ti2c&5ibvq=9p&0@vwrdv'
+SECRET_KEY = os.getenv("SECRET_KEY", "django-insecure-fr43)@@7@i&3%*8_5s2x_=syag8m4ti2c&5ibvq=9p&0@vwrdv")
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# En producción, mejor ponerlo en False
+DEBUG = False  
 
+# Hosts permitidos
+ALLOWED_HOSTS = [
+    "127.0.0.1",
+    "localhost",
+    "petconnect-backend-la15.onrender.com",
+    "pet-connect-frontend-three.vercel.app",
+]
 
-# CORS_ALLOWED_ORIGINS = [
-#     "https://telopago.vercel.app",
-#     "http://localhost:4321",
-#     "http://127.0.0.1:4321",
-#     "http://localhost:8000",  # Añadido
-#     "http://127.0.0.1:8000",
-#     "http://127.0.0.1:5000",
-#     "http://localhost:5000"
-# ]
-# CORS_ALLOW_METHODS = [
-#     'GET',
-#     'POST',
-#     'PUT',
-#     'PATCH',
-#     'DELETE',
-#     'OPTIONS'
-# ]
-# CORS_ALLOW_HEADERS = [
-#     'accept',
-#     'access-control-allow-headers',  # Necesario para algunos navegadores
-#     'access-control-allow-origin',
-#     'accept-encoding',
-#     'authorization',
-#     'content-type',
-#     'dnt',
-#     'origin',
-#     'user-agent',
-#     'x-csrftoken',
-#     'x-requested-with',
-# ]
-# ALLOWED_HOSTS = [
-#     'telopago-backend.onrender.com',
-#     'telopago.vercel.app',
-#     '127.0.0.1',
-#     'localhost',
-# ]
-
-CORS_ALLOW_ALL_ORIGINS = True 
-
-# Application definition
-
+# Configuración de CORS
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -67,7 +34,6 @@ INSTALLED_APPS = [
     'publicaciones',
     'usuarios',
     'mascotas'
-
 ]
 
 MIDDLEWARE = [
@@ -81,8 +47,13 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+# CORS - permitir solo tu frontend en Vercel
+CORS_ALLOWED_ORIGINS = [
+    "https://pet-connect-frontend-three.vercel.app",
+]
 
-
+# También puedes usar esto si prefieres permitir todos (menos seguro)
+# CORS_ALLOW_ALL_ORIGINS = True
 
 ROOT_URLCONF = 'petconnect.urls'
 
@@ -103,7 +74,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'petconnect.wsgi.application'
 
-
 # Database
 DATABASES = {
     'default': {
@@ -116,47 +86,18 @@ DATABASES = {
     }
 }
 
-
-
-# Password validation
-# https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
-
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
+    {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
 
-
-# Internationalization
-# https://docs.djangoproject.com/en/5.2/topics/i18n/
-
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'UTC'
-
 USE_I18N = True
-
 USE_TZ = True
-
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = 'static/'
 
-# Default primary key field type
-# https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
-
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-
